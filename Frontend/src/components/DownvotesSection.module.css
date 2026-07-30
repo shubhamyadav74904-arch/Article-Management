@@ -1,0 +1,28 @@
+/* .Button{
+    font-size: 30px;
+    width:130px; 
+    height:55px;
+    color:white;
+    background-color:black;
+    border-radius:10px;
+    margin-inline-end: 25px; 
+    
+} */
+
+.Button {
+  font-size: 30px;
+  width: 130px;
+  height: 55px;
+  color: #fff;
+  background: linear-gradient(90deg, #1e3c72, #2a5298); /* Blue gradient */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.Button:hover {
+  background: linear-gradient(90deg, #2a5298, #1e3c72);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transform: translateY(-3px);
+}

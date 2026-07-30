@@ -1,0 +1,28 @@
+/* .Button{
+    font-size: 30px;
+    width:130px; 
+    height:55px;
+    color:rgb(254, 254, 254);
+    background-color:rgb(0, 0, 0);
+    border-radius:10px;
+    margin-inline-end: 25px; 
+} */
+
+.Button {
+  font-size: 30px;
+  width: 130px;
+  height: 55px;
+  color: #fff;
+  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  border: none;
+  border-radius: 10px;
+  margin-inline-end: 25px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.Button:hover {
+  background: linear-gradient(90deg, #ff4b2b, #ff416c);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transform: translateY(-3px);
+}
