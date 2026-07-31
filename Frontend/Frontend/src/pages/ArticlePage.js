@@ -8,25 +8,26 @@ import UpvotesSection from '../components/UpvotesSection';
 import DownvotesSection from '../components/DownvotesSection';
 import AddCommentForm from '../components/AddCommentForm';
 
-const url = import.meta.VITE_API_KEY || '';
+const url = process.env.REACT_APP_API_URL || '';
 
 const ArticlePage = ()=>{
    // const name = match.params.name;
    const {name} = useParams();
    //console.log(name);
    //const article= articleContent.find((article)=>article.name===name);
-
+      console.log(url)
    const [articleInfo,setArticleInfo] = useState({upvotes:0,downvotes:0,comments:[]});
    
    useEffect(()=>{
       const fetchData = async ()=>{
         const result = await fetch(`${url}/api/articles/${name}`);  // fetch=> by default get method
         const body = await result.json();
+          console.log(body)
         setArticleInfo(body);
       }
       fetchData();
    },[name]); 
-
+  
 
     const article= articleContent.find((article)=>article.name===name);
     if(!article){

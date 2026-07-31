@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './DownvotesSection.module.css';
 
-const url = import.meta.VITE_API_KEY || '';
+const url = process.env.REACT_APP_API_URL || '';
 
 const DownvotesSection = ({articleName,downvotes,setArticleInfo})=>{
     const downvoteArticle = async ()=>{

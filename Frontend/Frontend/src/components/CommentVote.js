@@ -1,7 +1,7 @@
 import React from "react";
 import './CommentVote.css'
 
-const url = import.meta.VITE_API_KEY || '';
+const url = process.env.REACT_APP_API_URL || '';
 
 const CommentVote = ({ comment, articleName, setArticleInfo }) => {
 const upvoteComment = async () => {

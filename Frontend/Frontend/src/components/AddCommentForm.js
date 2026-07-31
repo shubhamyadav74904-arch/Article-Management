@@ -4,7 +4,7 @@ import $ from "jquery";
 // import {FaThumbsUp,FaThumbsDown} from "react-icons/fa";
 import './AddCommentForm.css';
 
-const url = import.meta.VITE_API_KEY || '';
+const url = process.env.REACT_APP_API_URL || '';
 const AddCommentForm = ({articleName,setArticleInfo}) =>{
     const [username,setUserName] = useState('');
     const [commentText,setCommentText] = useState('');
