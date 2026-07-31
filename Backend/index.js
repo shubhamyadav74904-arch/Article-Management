@@ -54,7 +54,10 @@ const express = require('express');
    const cors = require('cors');
    const app = express();
 
-   app.use(cors());
+   app.use(cors({
+  origin: 'https://article-management-tau.vercel.app', // apna Vercel URL daalo
+  credentials: true
+}));
 const dns = require('dns');
 dns.setServers(['8.8.8.8','8.8.4.4']);
 
