@@ -1,8 +1,11 @@
 import React from 'react';
 import styles from './UpvotesSection.module.css';
+
+const url = import.meta.VITE_API_KEY || ''; 
+
 const UpvotesSection = ({articleName,upvotes,setArticleInfo})=>{
     const upvoteArticle = async ()=>{
-        const result = await fetch(`/api/articles/${articleName}/upvote`,{    
+        const result = await fetch(`${url}/api/articles/${articleName}/upvote`,{    
             method:'post',
         });
 

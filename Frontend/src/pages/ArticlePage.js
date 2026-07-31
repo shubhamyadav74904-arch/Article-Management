@@ -7,6 +7,9 @@ import CommentsList from '../components/CommentsList';
 import UpvotesSection from '../components/UpvotesSection';
 import DownvotesSection from '../components/DownvotesSection';
 import AddCommentForm from '../components/AddCommentForm';
+
+const url = import.meta.VITE_API_KEY || '';
+
 const ArticlePage = ()=>{
    // const name = match.params.name;
    const {name} = useParams();
@@ -17,7 +20,7 @@ const ArticlePage = ()=>{
    
    useEffect(()=>{
       const fetchData = async ()=>{
-        const result = await fetch(`/api/articles/${name}`);  // fetch=> by default get method
+        const result = await fetch(`${url}/api/articles/${name}`);  // fetch=> by default get method
         const body = await result.json();
         setArticleInfo(body);
       }

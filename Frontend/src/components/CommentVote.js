@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import './CommentVote.css'
+
+const url = import.meta.VITE_API_KEY || '';
 
 const CommentVote = ({ comment, articleName, setArticleInfo }) => {
 const upvoteComment = async () => {
-    const result = await fetch(`/api/articles/${articleName}/comments/upvote`, {
+    const result = await fetch(`${url}/api/articles/${articleName}/comments/upvote`, {
         method: "post",
         headers: {
             'Content-Type': "application/json",
@@ -18,7 +20,7 @@ const upvoteComment = async () => {
 };
 
 const downvoteComment = async () => {
-    const result = await fetch(`/api/articles/${articleName}/comments/downvote`, {
+    const result = await fetch(`${url}/api/articles/${articleName}/comments/downvote`, {
         method: "post",
         headers: {
             'Content-Type': "application/json",

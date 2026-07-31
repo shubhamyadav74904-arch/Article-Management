@@ -1,8 +1,11 @@
 import React from 'react';
 import styles from './DownvotesSection.module.css';
+
+const url = import.meta.VITE_API_KEY || '';
+
 const DownvotesSection = ({articleName,downvotes,setArticleInfo})=>{
     const downvoteArticle = async ()=>{
-        const result = await fetch(`/api/articles/${articleName}/downvote`,{    
+        const result = await fetch(`${url}/api/articles/${articleName}/downvote`,{    
             method:'post',
         });
 

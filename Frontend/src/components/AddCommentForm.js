@@ -3,6 +3,8 @@ import $ from "jquery";
 //import "jquery-validation";
 // import {FaThumbsUp,FaThumbsDown} from "react-icons/fa";
 import './AddCommentForm.css';
+
+const url = import.meta.VITE_API_KEY || '';
 const AddCommentForm = ({articleName,setArticleInfo}) =>{
     const [username,setUserName] = useState('');
     const [commentText,setCommentText] = useState('');
@@ -45,7 +47,7 @@ const AddCommentForm = ({articleName,setArticleInfo}) =>{
            return;
         }
 
-        const result = await fetch(`/api/articles/${articleName}/add-comment`,{
+        const result = await fetch(`${url}/api/articles/${articleName}/add-comment`,{
             method:'post',
             body:JSON.stringify({username,text:commentText}),
             headers:{

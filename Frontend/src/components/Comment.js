@@ -2,6 +2,9 @@ import React from "react";
 import CommentVote from "./CommentVote";
 import { useState } from "react";
 import "./Comment.css";
+
+const url = import.meta.VITE_API_KEY || '';
+
 const Comment = ({ comment, articleName, setArticleInfo }) => {
     const [IsEditing, setIsEditing] = useState(false);
     const [editedText, setEditedText] = useState(comment.text)
@@ -12,7 +15,7 @@ const Comment = ({ comment, articleName, setArticleInfo }) => {
             alert("Comment cannot be empty");
             return;
         }
-        const result = await fetch(`/api/articles/${articleName}/comments/edit`, {
+        const result = await fetch(`${url}/api/articles/${articleName}/comments/edit`, {
             method: 'POST',
             headers: {
                 "Content-Type": 'Application/json',
@@ -31,7 +34,7 @@ const Comment = ({ comment, articleName, setArticleInfo }) => {
 
     const deleteComment = async () => {
 
-        const result = await fetch(`/api/articles/${articleName}/comments/delete`, {
+        const result = await fetch(`${url}/api/articles/${articleName}/comments/delete`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
