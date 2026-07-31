@@ -49,9 +49,12 @@ articlesInfo[articleName].Comments.push({username,text});
 
 
 const express = require('express');
-const bodyParser = require('body-parser');
-const {MongoClient} = require('mongodb');
-const app = express();
+   const bodyParser = require('body-parser');
+   const {MongoClient} = require('mongodb');
+   const cors = require('cors');
+   const app = express();
+
+   app.use(cors());
 const dns = require('dns');
 dns.setServers(['8.8.8.8','8.8.4.4']);
 
