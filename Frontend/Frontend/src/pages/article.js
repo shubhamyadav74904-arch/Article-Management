@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import articles from "./article-content";
 
-const url = process.env.REACT_APP_API_URL || '';
 
 const Article=()=>(
     <>
