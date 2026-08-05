@@ -56,7 +56,7 @@ const express = require('express');
 
 app.use(
   cors({
-    origin: "https://article-management-tau.vercel.app",
+    origin: "https://shubham-article-management.vercel.app",
   })
 );
 const dns = require('dns');
