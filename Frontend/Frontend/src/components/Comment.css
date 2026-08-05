@@ -259,3 +259,58 @@
     border-color:#9ca3af;
     transform:translateY(-2px);
 }
+
+@media (max-width: 480px) {
+  .comments-section h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .comment {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .comment h4 {
+    font-size: 16px;
+  }
+
+  .comment p {
+    font-size: 14px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .edit-textarea {
+    min-height: 90px;
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .comment-header, .comment-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .comment-actions,
+  .edit-actions,
+  .delete-confirm-actions {
+      /* stack vertically */
+    align-items: stretch;     /* full width buttons */
+    gap: 10px;
+    margin-bottom: 10px;               /* vertical spacing between buttons */
+  }
+
+  .edit-btn,
+  .delete-btn,
+  .save-btn,
+  .cancel-btn,
+  .confirm-delete-btn {
+    width: 100%;              /* buttons full width for mobile */
+  }
+}
