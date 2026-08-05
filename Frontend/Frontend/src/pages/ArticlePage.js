@@ -9,6 +9,7 @@ import DownvotesSection from '../components/DownvotesSection';
 import AddCommentForm from '../components/AddCommentForm';
 
 const url = process.env.REACT_APP_API_URL || '';
+console.log(url)
 
 const ArticlePage = ()=>{
    // const name = match.params.name;
