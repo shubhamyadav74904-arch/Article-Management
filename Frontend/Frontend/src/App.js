@@ -17,7 +17,10 @@ class App extends Component{
   render(){
     return (
       <Router>
-      
+        <header className="project-header">
+           <img src="/reading.png" alt="Project Logo" className="brand-logo" />
+           <h1 className="project-title">TechBlog</h1>
+        </header>
        <div id="page-body">
        <div className='App'>
         <NavBar/>
