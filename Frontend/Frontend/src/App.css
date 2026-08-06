@@ -1,113 +1,64 @@
-/* body{
-  font-family:'Segoe Ul',Tahoma,Geneva,Verdana,sans-serif;
-  font-size: 18px;
+/* Page Body */
+#page-body {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
-nav ul{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-nav li{
-  display:inline-block;
-  padding-top: 16px;
-  padding-bottom: 16px;
-
-}
-nav{
-  border-bottom: 4px solid rgb(245, 8, 8);
-  text-align: center;
-  background: rgb(244, 235, 235);
-}
-nav a{
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  padding: 10px 25px;
-  
-}
-nav a:hover{
-  background-color: black;
-  color: white;
-
-}
-h3,h4{
-  margin-bottom:0;
-}
-#page-body{
-  max-width: 700px;
-  margin: auto;
-  background-color: rgb(236, 248, 248);
-  /* padding: top 64px;  */
-
-
-
-
-#add-comment-form{
-  background-color: rgb(227, 217, 227);
-  padding-top: 5px;
-  padding-left: 10px;
-}
-
-/* #page-bod{
-  max: width 700px;
-} */
-
-
-
-
-
-
-
-
-
-
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.project-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 12px;
+  border-radius: 12px;
+  padding: 15px 10px; /* compact spacing */
+  background: #ffffff; /* light clean background */
+  border-bottom: 5px solid #ff416c; /* accent line */
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  box-shadow: 0 -6px 16px rgba(0,0,0,0.1);
+}
+
+.project-header:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1), 
+              0 -6px 16px rgba(0,0,0,0.1); /* stronger hover shadow */
+}
+
+.brand-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, red, #00f2fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
   color: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.brand-logo:hover {
+  transform: scale(1.2);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
-/* Global Styles */
-body {
-  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16px;
+.project-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fa0000;
   margin: 0;
-  background: #f9f9f9;
-  color: #333;
+  transition: color 0.3s ease,text-shadow 0.3s ease,transform 0.3s ease;
+}
+
+.project-title:hover {
+  color: #c62828; /* hover color */
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  transform: scale(1.05); /* slight zoom */
 }
 
 /* Navigation Bar */
@@ -145,58 +96,10 @@ nav a:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* Page Body */
-#page-body {
-  max-width: 900px;
-  margin: 40px auto;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-}
-
 /* Headings */
 h3, h4 {
   margin-bottom: 10px;
   color: #ff416c;
 }
 
-/* Comment Form */
-#add-comment-form {
-  background: #f3f3f3;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 20px;
-}
 
-#add-comment-form input,
-#add-comment-form textarea {
-  width: 95%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  transition: border 0.3s ease;
-}
-
-#add-comment-form input:focus,
-#add-comment-form textarea:focus {
-  border-color: #ff416c;
-  outline: none;
-}
-
-#add-comment-form button {
-  background: #ff416c;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-#add-comment-form button:hover {
-  background: #ff4b2b;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
