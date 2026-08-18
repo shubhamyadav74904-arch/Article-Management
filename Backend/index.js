@@ -68,7 +68,7 @@ const commentSchema = new mongoose.Schema(
 
 
 const articleSchema = new mongoose.Schema({
-    name: { type: String, required: [true, "Article name is required"], trim: true, minlenght: [3, "Article name must be at least 3 characters"], maxLength: [100, "Article name caannot exceed 100 characters"], },
+    name: { type: String, required: [true, "Article name is required"], trim: true, minlength: [3, "Article name must be at least 3 characters"], maxLength: [100, "Article name caannot exceed 100 characters"], },
     upvotes: { type: Number, default: 0, min: [0, "Upvotes cannot be negative"] },
     downvotes: { type: Number, default: 0, min: [0, "Downvotes cannot be negative"], },
     comments: {
@@ -87,7 +87,7 @@ const Article = mongoose.model('Article', articleSchema, 'articles');
 const getArticleSchema = Joi.object({ name: Joi.string().min(3).required() });
 const addCommentSchema = Joi.object({
     username: Joi.string().pattern(/^[A-Za-z\s]+$/).min(3).max(30).required(),
-    text: Joi.string().min(10).max(200).required()
+    text: Joi.string().min(10).max(500).required()
 });
 const voteSchema = Joi.object({ name: Joi.string().min(3).required() });
 
@@ -133,7 +133,10 @@ app.get('/api/articles/:name', validate(getArticleSchema, "params"), async (req,
     const articleName = req.params.name;
     withDB(async () => {
         const articlesInfo = await Article.findOne({ name: articleName });
-        res.status(200).json(articlesInfo);
+       if (!articlesInfo) {
+            return res.status(404).json({ message: "Article not found" });
+        }
+      res.status(200).json(articlesInfo);
     }, res);
 });
 
