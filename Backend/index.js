@@ -3,11 +3,18 @@ dotenv.config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 const Joi = require('joi');
 app.use(bodyParser.json());
+
+app.use(
+  cors({
+    origin: "https://shubham-article-management.vercel.app",
+  })
+);
 
 (async () => {
     try {
