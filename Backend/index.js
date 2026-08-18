@@ -98,9 +98,10 @@ const commentVoteSchema = Joi.object({
 });
 
 const commentEditSchema = Joi.object({
-    id: Joi.string().required(),
+     id: Joi.string().required(),
     username: Joi.string().min(3).required(),
-    newText: Joi.string().min(1).max(200).required()
+    oldText: Joi.string().min(10).max(500).required(),
+    newText: Joi.string().min(10).max(500).required()
 });
 
 const commentDeleteSchema = Joi.object({
