@@ -276,6 +276,10 @@ app.post('/api/articles/:name/comments/edit', validate(commentEditSchema), async
             }
         );
 
+        if (result.modifiedCount === 0) {
+            return res.status(404).json({ message: "Comment not found or old text mismatch" });
+        }
+      
         const updatedArticlesInfo = await Article.findOne({ name: articleName });
 
         res.status(200).json(updatedArticlesInfo)
