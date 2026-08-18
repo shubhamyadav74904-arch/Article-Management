@@ -267,7 +267,10 @@ app.post('/api/articles/:name/comments/edit', validate(commentEditSchema), async
             {
                 arrayFilters: [
                     {
-                        'elem.id': id
+                        "elem.id": id,
+                        "elem.username":username,
+                        "elem.text": oldText,
+                        "elem.username": username
                     }
                 ]
             }
