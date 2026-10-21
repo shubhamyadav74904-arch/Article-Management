@@ -65,7 +65,12 @@ const commentSchema = new mongoose.Schema(
 
 
 const articleSchema = new mongoose.Schema({
-    name: { type: String, required: [true, "Article name is required"], trim: true, minlength: [3, "Article name must be at least 3 characters"], maxLength: [100, "Article name caannot exceed 100 characters"], },
+    name: { type: String, 
+            required: [true, "Article name is required"], 
+            trim: true, 
+            minlength: [3, "Article name must be at least 3 characters"], 
+            maxLength: [100, "Article name caannot exceed 100 characters"], 
+          },
     upvotes: { type: Number, default: 0, min: [0, "Upvotes cannot be negative"] },
     downvotes: { type: Number, default: 0, min: [0, "Downvotes cannot be negative"], },
     comments: {
