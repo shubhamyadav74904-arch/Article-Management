@@ -9,12 +9,9 @@ const dns = require('dns');
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 const Joi = require('joi');
 app.use(bodyParser.json());
-
-app.use(
-  cors({
-    origin: "https://shubham-article-management.vercel.app",
-  })
-);
+app.use(cors({
+    origin: 'https://shubham-article-management.vercel.app',
+}));
 
 (async () => {
     try {
@@ -87,25 +84,25 @@ const Article = mongoose.model('Article', articleSchema, 'articles');
 const getArticleSchema = Joi.object({ name: Joi.string().min(3).required() });
 const addCommentSchema = Joi.object({
     username: Joi.string().pattern(/^[A-Za-z\s]+$/).min(3).max(30).required(),
-    text: Joi.string().min(10).max(500).required()
+    text: Joi.string().min(5).max(500).required()
 });
 const voteSchema = Joi.object({ name: Joi.string().min(3).required() });
 
 const commentVoteSchema = Joi.object({
-    id: Joi.string().required(),
+    id: Joi.alternatives().try(Joi.string(), Joi.number()).required(),
     username: Joi.string().min(3).required(),
     text: Joi.string().optional()
 });
 
 const commentEditSchema = Joi.object({
-     id: Joi.string().required(),
+    id: Joi.string().required(),
     username: Joi.string().min(3).required(),
     oldText: Joi.string().min(10).max(500).required(),
     newText: Joi.string().min(10).max(500).required()
 });
 
 const commentDeleteSchema = Joi.object({
-    id: Joi.string().required(),
+    id: Joi.number().required(),
     username: Joi.string().min(3).required(),
     text: Joi.string().optional()
 });
@@ -125,23 +122,19 @@ const withDB = async (operation, res) => {
     try {
         await operation();
     } catch (error) {
-        res.status(500).json({ message: `Error: running DB operation`, error });
+        res.status(500).json({ message: `Error: running DB operation`, error});
     }
 };
 
-//APIs
 app.get('/api/articles/:name', validate(getArticleSchema, "params"), async (req, res) => {
     const articleName = req.params.name;
     withDB(async () => {
         const articlesInfo = await Article.findOne({ name: articleName });
-       if (!articlesInfo) {
-            return res.status(404).json({ message: "Article not found" });
-        }
-      res.status(200).json(articlesInfo);
+        res.status(200).json(articlesInfo);
     }, res);
 });
 
-// upvote end-point
+// api/articles/:name/upvote end-point
 app.post('/api/articles/:name/upvote', validate(voteSchema, "params"), async (req, res) => {
     withDB(async (db) => {
         const articleName = req.params.name;
@@ -162,7 +155,7 @@ app.post('/api/articles/:name/upvote', validate(voteSchema, "params"), async (re
 
 });
 
-// downvote end-point
+// api/articles/:name/downvote end point
 app.post('/api/articles/:name/downvote', validate(voteSchema, "params"), async (req, res) => {
     withDB(async (db) => {
         const articleName = req.params.name;
@@ -183,7 +176,7 @@ app.post('/api/articles/:name/downvote', validate(voteSchema, "params"), async (
 
 });
 
-// comment end-point
+// // add-comment end-point
 app.post('/api/articles/:name/add-comment', validate(addCommentSchema), (req, res) => {
     const { username, text } = req.body;
     const articleName = req.params.name;
@@ -250,41 +243,39 @@ app.post("/api/articles/:name/comments/downvote", validate(commentVoteSchema), a
 
 // comment edit end point 
 app.post('/api/articles/:name/comments/edit', validate(commentEditSchema), async (req, res) => {
-    withDB(async (db) => {
+    try {
         const articleName = req.params.name;
         const id = req.body.id;
-        const username = req.body.username
+        const username = req.body.username;
         const oldText = req.body.oldText;
         const newText = req.body.newText;
 
         await Article.updateOne(
             { name: articleName },
             {
-                '$set': {
+                $set: {
                     "comments.$[elem].text": newText
                 }
             },
             {
                 arrayFilters: [
                     {
-                        "elem.id": id,
-                        "elem.username":username,
-                        "elem.text": oldText,
-                        "elem.username": username
+                        'elem.id': id,
                     }
                 ]
             }
         );
 
-        if (result.modifiedCount === 0) {
-            return res.status(404).json({ message: "Comment not found or old text mismatch" });
-        }
-      
         const updatedArticlesInfo = await Article.findOne({ name: articleName });
+        console.log("Updated article sent to frontend:", updatedArticlesInfo);
+       
+        return res.status(200).json(updatedArticlesInfo);
 
-        res.status(200).json(updatedArticlesInfo)
-
-    }, res)
+    } catch (error) {
+        if (!res.headersSent) {
+            return res.status(500).json({ message: 'Error: running DB operation', error: error.message });
+        }
+    }
 });
 
 // comment delete end point
