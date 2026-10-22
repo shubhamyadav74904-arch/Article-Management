@@ -65,6 +65,7 @@ const url = import.meta.VITE_API_KEY || '';
 
 const CommentVote = ({ comment, articleName, setArticleInfo }) => {
     const upvoteComment = async () => {
+     try {
         const result = await fetch(`${url}/api/articles/${articleName}/comments/upvote`, {
             method: "post",
             headers: {
@@ -76,10 +77,18 @@ const CommentVote = ({ comment, articleName, setArticleInfo }) => {
                 text: comment.text,
             }),
         });
+
+        if (!result.ok) {
+      const text = await result.text(); 
+      throw new Error(`Server error: ${text}`);
+    } 
         const body = await result.json();
         console.log("heello", body)
         setArticleInfo(body);
-    };
+    } catch (err) {
+    console.error("Upvote failed:", err);
+  }
+};
 
     const downvoteComment = async () => {
         const result = await fetch(`${url}/api/articles/${articleName}/comments/downvote`, {
