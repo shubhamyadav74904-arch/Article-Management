@@ -61,18 +61,41 @@ try {
         
     const deleteComment = async () => {
 
-        const result = await fetch(`${url}/api/articles/${articleName}/comments/delete`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                id: comment.id
-            }),
-        });
-        const body = await result.json();
-        setArticleInfo(body)
-    };
+    //     const result = await fetch(`${url}/api/articles/${articleName}/comments/delete`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //             id: comment.id
+    //         }),
+    //     });
+    //     const body = await result.json();
+    //     setArticleInfo(body)
+    // };
+    try {
+    const result = await fetch(`${url}/api/articles/${articleName}/comments/delete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: comment.id,
+        username: comment.username,   
+      }),
+    });
+
+    if (!result.ok) {
+      const text = await result.text();
+      throw new Error(`Server error: ${text}`);
+    }
+
+    const body = await result.json();
+    if (body && body.comments) {
+      setArticleInfo(body);
+    }
+  } catch (err) {
+    console.error("Delete failed:", err);
+  }
+};    
 
    return (
     <div className="comment">
