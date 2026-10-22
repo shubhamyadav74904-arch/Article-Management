@@ -15,23 +15,48 @@ const Comment = ({ comment, articleName, setArticleInfo }) => {
             alert("Comment cannot be empty");
             return;
         }
-        const result = await fetch(`${url}/api/articles/${articleName}/comments/edit`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": 'Application/json',
-            },
-            body: JSON.stringify({
-                id: comment.id,
-                newText: editedText,
-            }),
-        }
-        );
+    //     const result = await fetch(`${url}/api/articles/${articleName}/comments/edit`, {
+    //         method: 'POST',
+    //         headers: {
+    //             "Content-Type": 'Application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             id: comment.id,
+    //             newText: editedText,
+    //         }),
+    //     }
+    //     );
 
-        const body = await result.json();
-        setArticleInfo(body);
-        setIsEditing(false);
-    };
+    //     const body = await result.json();
+    //     setArticleInfo(body);
+    //     setIsEditing(false);
+    // };
 
+try {
+    const result = await fetch(`${url}/api/articles/${articleName}/comments/edit`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: comment.id,
+        text: editedText,   // 👈 yahan "text" bhejna hai, "newText" nahi
+      }),
+    });
+
+    if (!result.ok) {
+      const text = await result.text();
+      throw new Error(`Server error: ${text}`);
+    }
+
+    const body = await result.json();
+    if (body && body.comments) {
+      setArticleInfo(body);
+    }
+    setIsEditing(false);
+  } catch (err) {
+    console.error("Edit failed:", err);
+  }
+};
+        
     const deleteComment = async () => {
 
         const result = await fetch(`${url}/api/articles/${articleName}/comments/delete`, {
