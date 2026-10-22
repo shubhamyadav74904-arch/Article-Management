@@ -38,7 +38,9 @@ try {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: comment.id,
-        text: editedText,   // 👈 yahan "text" bhejna hai, "newText" nahi
+        username: comment.username,   
+        oldText: comment.text,       
+        newText: editedText,
       }),
     });
 
